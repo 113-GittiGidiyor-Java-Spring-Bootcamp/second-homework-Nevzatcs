@@ -93,6 +93,5 @@ PUT localhost:8080/api/instructors/1
 "name" : "Mehmet",
 "address": "istanbul",
 "phoneNumber":"05363578987"
-
 }
 ``` 
