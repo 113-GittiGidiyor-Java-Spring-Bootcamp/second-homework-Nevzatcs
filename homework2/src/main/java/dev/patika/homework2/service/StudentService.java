@@ -42,7 +42,6 @@ public class StudentService implements BaseService<Student> {
     }
 
     @Override
-    @Transactional
     public Student updateOnDatabase(Student student) {
         return (Student) studentStudentDAO.updateOnDatabase(student);
     }

@@ -1,6 +1,6 @@
 package dev.patika.homework2.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.persistence.*;

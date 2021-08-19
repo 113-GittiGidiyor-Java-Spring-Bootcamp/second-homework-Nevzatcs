@@ -36,17 +36,15 @@ public class StudentDAOJPA implements StudentDAO<Student>{
     }
 
     @Override
-
+    @Transactional
     public void deleteById(int id) {
         Student student = entityManager.createQuery("FROM Student s WHERE s.id=:id", Student.class).setParameter("id",id).getSingleResult();
         entityManager.remove(student);
     }
-
     @Override
     @Transactional
     public Student updateOnDatabase(Student student) {
         Student foundStudent = entityManager.find(Student.class, student);
-
         return entityManager.merge(foundStudent);
     }
 }

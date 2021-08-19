@@ -1,15 +1,16 @@
 package dev.patika.homework2.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import javax.persistence.Entity;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 // implemented according to requirements
 @Entity
-public class Student {
+public class Student  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
