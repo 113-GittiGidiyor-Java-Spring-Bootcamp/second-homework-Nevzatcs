@@ -83,6 +83,25 @@ PUT localhost:8080/api/course/1
 "creditScore":5
 }
 ``` 
+### Update course and instructor
+``` 
+POST localhost:8080/api/students
+    {
+        "id": 1,
+        "courseName": "Math",
+        "courseCode": 1001,
+        "creditScore": 5,
+        "instructor": {
+            
+        "id": 1,
+        "name": "Mehmet",
+        "address": "ist",
+        "phoneNumber": "05363578987",
+        "hourlySalary":25
+    
+        }
+    }
+```
 ## Instructor HTTP Methods
 ### GET datas
 ``` 
@@ -114,3 +133,4 @@ PUT localhost:8080/api/instructors/1
 "phoneNumber":"05363578987"
 }
 ``` 
+

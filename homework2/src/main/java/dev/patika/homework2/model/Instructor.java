@@ -1,6 +1,7 @@
 package dev.patika.homework2.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Instructor {
 
 
     @OneToMany(mappedBy = "instructor")
+    @JsonIgnore
     private List<Course> instructorCourse = new ArrayList<>();
 
     public Instructor(String name, String address, String phoneNumber) {
@@ -30,6 +32,7 @@ public class Instructor {
 
     public Instructor() {
     }
+
 
     public int getId() {
         return id;
