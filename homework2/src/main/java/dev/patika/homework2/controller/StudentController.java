@@ -40,8 +40,8 @@ public class StudentController {
     }
 
     @PutMapping("/students/{id}")
-    public void updateStudent(@RequestBody Student student, @PathVariable int id){
-        studentService.updateOnDatabase(student);
+    public Student updateStudent(@RequestBody Student student, @PathVariable int id){
+       return studentService.updateOnDatabase(student, id);
     }
 
 

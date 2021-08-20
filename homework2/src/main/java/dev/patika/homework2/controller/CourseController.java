@@ -40,7 +40,7 @@ public class CourseController {
 
     @PutMapping("/courses/{id}")
     public Course updateCourse(@RequestBody Course course, @PathVariable int id){
-        return   courseService.save(course);
+        return   courseService.updateOnDatabase(course, id);
     }
 
 

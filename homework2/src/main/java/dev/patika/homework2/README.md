@@ -32,7 +32,26 @@ PUT localhost:8080/api/students/1
 "s_gender" : "male"
 }
 ``` 
-
+### Update course and student
+``` 
+POST localhost:8080/api/students
+    {
+        "id":3,
+        "s_name": "Al",
+        "s_birthDate": "2021-05-03",
+        "s_address": "ista",
+        "s_gender": "male",
+        "studentCourse": [
+           {
+                "id":1,
+                "courseName": "Math",
+                "courseCode": 1001,
+                "creditScore": 5,
+                "instructor": null
+           }
+        ]
+    }
+``` 
 ## Course HTTP Methods
 ### GET datas
 ``` 

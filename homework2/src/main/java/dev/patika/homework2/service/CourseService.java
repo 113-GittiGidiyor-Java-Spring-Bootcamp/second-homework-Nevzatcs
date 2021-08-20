@@ -41,7 +41,7 @@ public class CourseService implements BaseService<Course>{
 
     @Override
     @Transactional
-    public Course updateOnDatabase(Course course) {
-        return (Course) courseDAO.updateOnDatabase(course);
+    public Course updateOnDatabase(Course course, int id) {
+        return (Course) courseDAO.updateOnDatabase(course, id);
     }
 }

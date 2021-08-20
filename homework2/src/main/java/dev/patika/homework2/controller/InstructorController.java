@@ -41,7 +41,7 @@ public class InstructorController {
 
     @PutMapping("/instructors/{id}")
     public Instructor updateCourse(@RequestBody Instructor instructor, @PathVariable int id){
-        return   instructorService.save(instructor);
+        return   instructorService.updateOnDatabase(instructor,id);
     }
 
 

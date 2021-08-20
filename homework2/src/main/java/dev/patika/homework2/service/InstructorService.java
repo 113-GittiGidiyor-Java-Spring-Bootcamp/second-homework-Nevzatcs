@@ -44,7 +44,7 @@ public class InstructorService implements BaseService<Instructor> {
 
     @Override
     @Transactional
-    public Instructor updateOnDatabase(Instructor instructor) {
-        return (Instructor) instructorInstructorDAO.updateOnDatabase(instructor);
+    public Instructor updateOnDatabase(Instructor instructor, int id) {
+        return (Instructor) instructorInstructorDAO.updateOnDatabase(instructor, id);
     }
 }

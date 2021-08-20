@@ -1,5 +1,7 @@
 package dev.patika.homework2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,6 +43,14 @@ public class Student  {
         this.studentCourse = studentCourse;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getS_name() {
         return s_name;
     }
@@ -78,22 +88,23 @@ public class Student  {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(s_name, student.s_name) && Objects.equals(s_birthDate, student.s_birthDate) && Objects.equals(s_address, student.s_address) && Objects.equals(s_gender, student.s_gender);
+        return id == student.id && Objects.equals(s_name, student.s_name) && Objects.equals(s_birthDate, student.s_birthDate) && Objects.equals(s_address, student.s_address) && Objects.equals(s_gender, student.s_gender) && Objects.equals(studentCourse, student.studentCourse);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(s_name, s_birthDate, s_address, s_gender);
+        return Objects.hash(id, s_name, s_birthDate, s_address, s_gender, studentCourse);
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "s_name='" + s_name + '\'' +
+                "id=" + id +
+                ", s_name='" + s_name + '\'' +
                 ", s_birthDate=" + s_birthDate +
                 ", s_address='" + s_address + '\'' +
                 ", s_gender='" + s_gender + '\'' +
+                ", studentCourse=" + studentCourse +
                 '}';
     }
-
 }

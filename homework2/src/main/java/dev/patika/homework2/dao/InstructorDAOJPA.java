@@ -44,8 +44,12 @@ public class InstructorDAOJPA implements InstructorDAO<Instructor>{
 
     @Override
     @Transactional
-    public Instructor updateOnDatabase(Instructor instructor) {
-        Instructor foundInstructor = entityManager.find(Instructor.class, instructor);
-        return entityManager.merge(foundInstructor);
+    public Instructor updateOnDatabase(Instructor instructor, int id) {
+        Instructor foundInstructor = entityManager.find(Instructor.class, id);
+        foundInstructor.setName(instructor.getName());
+        foundInstructor.setAddress(instructor.getAddress());
+        foundInstructor.setPhoneNumber(instructor.getPhoneNumber());
+        entityManager.merge(foundInstructor);
+        return foundInstructor;
     }
 }

@@ -1,4 +1,6 @@
 package dev.patika.homework2.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.*;
@@ -25,6 +27,7 @@ public class Course {
     }
 
     @ManyToMany(mappedBy = "studentCourse")
+    @JsonIgnore
     private List<Student> courses = new ArrayList<>();
 
     @ManyToOne
@@ -47,6 +50,14 @@ public class Course {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCourseName() {
@@ -78,20 +89,23 @@ public class Course {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return courseCode == course.courseCode && creditScore == course.creditScore && Objects.equals(courseName, course.courseName);
+        return id == course.id && courseCode == course.courseCode && creditScore == course.creditScore && Objects.equals(courseName, course.courseName) && Objects.equals(courses, course.courses) && Objects.equals(instructor, course.instructor);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(courseName, courseCode, creditScore);
+        return Objects.hash(id, courseName, courseCode, creditScore, courses, instructor);
     }
 
     @Override
     public String toString() {
         return "Course{" +
-                "courseName='" + courseName + '\'' +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
                 ", courseCode=" + courseCode +
                 ", creditScore=" + creditScore +
+                ", courses=" + courses +
+                ", instructor=" + instructor +
                 '}';
     }
 }

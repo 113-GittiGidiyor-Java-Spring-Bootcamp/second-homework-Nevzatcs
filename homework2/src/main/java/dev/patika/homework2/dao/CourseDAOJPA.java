@@ -3,6 +3,7 @@ package dev.patika.homework2.dao;
 
 import dev.patika.homework2.model.Course;
 
+import dev.patika.homework2.model.Student;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,8 +44,13 @@ public class CourseDAOJPA implements CourseDAO<Course>{
     }
 
     @Override
-    public Course updateOnDatabase(Course course) {
-        Course foundCourse = entityManager.find(Course.class, course);
-        return entityManager.merge(foundCourse);
+    public Course updateOnDatabase(Course course,int id ){
+        Course foundCourse = entityManager.find(Course.class, id);
+        foundCourse.setCourseName(course.getCourseName());
+        foundCourse.setCourseCode(course.getCourseCode());
+        foundCourse.setCreditScore(course.getCreditScore());
+        entityManager.merge(foundCourse);
+        return foundCourse;
+
     }
 }

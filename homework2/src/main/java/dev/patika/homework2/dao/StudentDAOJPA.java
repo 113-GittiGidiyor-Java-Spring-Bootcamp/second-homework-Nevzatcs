@@ -43,8 +43,13 @@ public class StudentDAOJPA implements StudentDAO<Student>{
     }
     @Override
     @Transactional
-    public Student updateOnDatabase(Student student) {
-        Student foundStudent = entityManager.find(Student.class, student);
-        return entityManager.merge(foundStudent);
+    public Student updateOnDatabase(Student student , int id) {
+        Student foundStudent = entityManager.find(Student.class, id);
+        foundStudent.setS_name(student.getS_name());
+        foundStudent.setS_address(student.getS_address());
+        foundStudent.setS_birthDate(student.getS_birthDate());
+        foundStudent.setS_gender(student.getS_gender());
+        entityManager.merge(foundStudent);
+        return foundStudent;
     }
 }
