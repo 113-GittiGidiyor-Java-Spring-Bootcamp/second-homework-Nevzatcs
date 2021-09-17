@@ -1,47 +1,55 @@
 package dev.patika.homework2.service;
 
-import dev.patika.homework2.dao.CourseDAO;
+import dev.patika.homework2.repository.CourseRepository;
 import dev.patika.homework2.model.Course;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CourseService implements BaseService<Course>{
-    private CourseDAO courseDAO;
-
-    @Autowired
-    public CourseService(CourseDAO courseDAO) {
-        this.courseDAO = courseDAO;
-    }
+    private final CourseRepository repository;
 
     @Override
     public List<Course> findAll() {
-        return courseDAO.findAll();
+        List<Course> courseList = new ArrayList<>();
+        Iterable<Course> courseIter = repository.findAll();
+        courseIter.iterator().forEachRemaining(courseList::add);
+        return courseList;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Course findById(int id) {
-        return (Course) courseDAO.findById(id);
+        return repository.findById(id).get();
     }
 
     @Override
     @Transactional
     public Course save(Course course) {
-        return (Course) courseDAO.save(course);
+        return (Course) repository.save(course);
     }
 
     @Override
     @Transactional
     public void deleteById(int id) {
-        courseDAO.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public Course updateOnDatabase(Course course, int id) {
-        return (Course) courseDAO.updateOnDatabase(course, id);
+    public Course updateOnDatabase(Course course) {
+        return  repository.save(course);
+    }
+
+    @Transactional
+    @Override
+    public void delete(Course course) {
+        repository.delete(course);
+
     }
 }

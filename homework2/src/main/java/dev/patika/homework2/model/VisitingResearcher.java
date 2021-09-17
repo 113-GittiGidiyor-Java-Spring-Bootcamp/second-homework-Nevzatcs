@@ -1,25 +1,20 @@
 package dev.patika.homework2.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 // implemented according to requirements
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+
 public class VisitingResearcher extends Instructor{
 
     private double hourlySalary;
 
-    public VisitingResearcher(String name, String address, String phoneNumber, double hourlySalary) {
-        super(name, address, phoneNumber);
-        this.hourlySalary=hourlySalary;
-    }
 
-    public VisitingResearcher() {
-    }
-
-    public double getHourlySalary() {
-        return hourlySalary;
-    }
-
-    public void setHourlySalary(double hourlySalary) {
-        this.hourlySalary = hourlySalary;
-    }
 }

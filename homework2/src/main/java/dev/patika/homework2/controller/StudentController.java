@@ -1,5 +1,6 @@
 package dev.patika.homework2.controller;
 
+import dev.patika.homework2.model.Course;
 import dev.patika.homework2.model.Student;
 import dev.patika.homework2.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +35,21 @@ public class StudentController {
     public void deleteStudentById(@PathVariable int id){
         studentService.deleteById(id);
     }
+
     @GetMapping("/students/{id}")
     public Student findStudentById(@PathVariable int id){
         return  studentService.findById(id);
     }
 
-    @PutMapping("/students/{id}")
+    @PutMapping("/students")
     public Student updateStudent(@RequestBody Student student, @PathVariable int id){
-       return studentService.updateOnDatabase(student, id);
+       return studentService.updateOnDatabase(student);
+    }
+
+    @GetMapping("students/delete-student")
+    public String deleteStudent(@RequestBody Student student){
+        studentService.delete(student);
+        return student + " is deleted";
     }
 
 

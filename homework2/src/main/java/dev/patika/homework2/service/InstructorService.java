@@ -1,50 +1,63 @@
 package dev.patika.homework2.service;
 
-import dev.patika.homework2.dao.InstructorDAO;
+import dev.patika.homework2.repository.InstructorRepository;
 import dev.patika.homework2.model.Instructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class InstructorService implements BaseService<Instructor> {
 
-    private InstructorDAO instructorInstructorDAO;
-
+    private final InstructorRepository repository;
+/*
     @Autowired
     public InstructorService(@Qualifier("instructorDAOJPA")InstructorDAO instructorInstructorDAO) {
         this.instructorInstructorDAO = instructorInstructorDAO;
     }
 
+
+ */
     @Override
     public List<Instructor> findAll() {
-        return instructorInstructorDAO.findAll();
+        List<Instructor> insList = new ArrayList<>();
+        Iterable<Instructor> employeeIter = repository.findAll();
+        employeeIter.iterator().forEachRemaining(insList::add);
+        return insList;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Instructor findById(int id) {
-        return (Instructor) instructorInstructorDAO.findById(id);
+        return (Instructor) repository.findById(id).get();
     }
 
     @Override
     @Transactional
     public Instructor save(Instructor instructor) {
-        return (Instructor) instructorInstructorDAO.save(instructor);
+        return (Instructor) repository.save(instructor);
     }
 
     @Override
     @Transactional
     public void deleteById(int id) {
-        instructorInstructorDAO.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public Instructor updateOnDatabase(Instructor instructor, int id) {
-        return (Instructor) instructorInstructorDAO.updateOnDatabase(instructor, id);
+    public Instructor updateOnDatabase(Instructor instructor) {
+        return (Instructor) repository.save(instructor);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Instructor instructor) {
+        repository.delete(instructor);
     }
 }

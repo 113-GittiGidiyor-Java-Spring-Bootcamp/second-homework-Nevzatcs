@@ -1,48 +1,62 @@
 package dev.patika.homework2.service;
 
-import dev.patika.homework2.dao.StudentDAO;
+import dev.patika.homework2.repository.StudentRepository;
 import dev.patika.homework2.model.Student;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService implements BaseService<Student> {
 
-    private StudentDAO studentStudentDAO;
-
+    private final StudentRepository repository;
+/*
     @Autowired
     public StudentService(@Qualifier("studentDAOJPA") StudentDAO studentStudentDAO) {
         this.studentStudentDAO = studentStudentDAO;
     }
 
+
+ */
     @Override
     public List<Student> findAll() {
-        return studentStudentDAO.findAll();
+        List<Student> stuList = new ArrayList<>();
+        Iterable<Student> studentIter = repository.findAll();
+        studentIter.iterator().forEachRemaining(stuList::add);
+        return stuList;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Student findById(int id) {
-        return (Student) studentStudentDAO.findById(id);
+        return (Student) repository.findById(id).get();
     }
 
     @Override
     @Transactional
     public Student save(Student student) {
-        return (Student) studentStudentDAO.save(student);
+        return (Student) repository.save(student);
     }
 
     @Override
     @Transactional
     public void deleteById(int id) {
-        studentStudentDAO.deleteById(id);
+        repository.deleteById(id);
     }
 
     @Override
-    public Student updateOnDatabase(Student student, int id) {
-        return (Student) studentStudentDAO.updateOnDatabase(student, id);
+    @Transactional
+    public Student updateOnDatabase(Student student) {
+        return (Student) repository.save(student);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Student student) {
+        repository.delete(student);
     }
 }

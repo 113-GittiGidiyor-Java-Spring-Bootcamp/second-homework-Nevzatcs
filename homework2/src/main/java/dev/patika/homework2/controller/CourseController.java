@@ -33,15 +33,23 @@ public class CourseController {
     public void deleteCourseById(@PathVariable int id){
         courseService.deleteById(id);
     }
+
     @GetMapping("/courses/{id}")
     public Course findCourseById(@PathVariable int id){
         return  courseService.findById(id);
     }
 
-    @PutMapping("/courses/{id}")
-    public Course updateCourse(@RequestBody Course course, @PathVariable int id){
-        return   courseService.updateOnDatabase(course, id);
+    @PutMapping("/courses")
+    public Course updateCourse(@RequestBody Course course){
+        return   courseService.updateOnDatabase(course);
     }
+
+    @GetMapping("/courses/delete-course")
+    public String deleteCourse(@RequestBody Course course){
+        courseService.delete(course);
+        return course + " is deleted";
+    }
+
 
 
 }

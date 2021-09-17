@@ -1,0 +1,1 @@
+insert into student (s_name, s_birth_date, s_address, s_gender) values ('Kippy Fredi', '2020-01-01', 'İstaNBUL', 'Male');
